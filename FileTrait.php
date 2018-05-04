@@ -1,6 +1,6 @@
 <?php
 /**
- * FileSystem
+ * FileTrait
  *
  * @author Putra Sudaryanto <putra@sudaryanto.id>
  * @contact (+62)856-299-4114
@@ -8,7 +8,7 @@
  * @created date 17 April 2018, 08:36 WIB
  * @link https://github.com/ommu/yii2-traits
  *
- * FileSystem berisi kumpulan fungsi yang berhubungan sistem file, seperti buat folder, hapus folder,
+ * FileTrait berisi kumpulan fungsi yang berhubungan sistem file, seperti buat folder, hapus folder,
  * normalisasi nama file sehingga url friendly dll.
  *
  * Contains many function that most used :
@@ -18,9 +18,9 @@
  *
  */
 
-namespace ommu\trait;
+namespace ommu\traits;
 
-trait FileSystem {
+trait FileTrait {
 	
 	/**
 	 * Create URL Title

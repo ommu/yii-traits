@@ -1,6 +1,6 @@
 <?php
 /**
- * GridViewSystem
+ * GridViewTrait
  *
  * @author Putra Sudaryanto <putra@sudaryanto.id>
  * @contact (+62)856-299-4114
@@ -8,7 +8,7 @@
  * @created date 17 April 2018, 08:36 WIB
  * @link https://github.com/ommu/yii2-traits
  * 
- * GridViewSystem berisi kumpulan fungsi yang berhubungan dengan grid-view system pada yii2-framework, 
+ * GridViewTrait berisi kumpulan fungsi yang berhubungan dengan grid-view system pada yii2-framework, 
  * seperti fungsi filter yes/no, quick-action dll.
  *
  * Contains many function that most used :
@@ -17,12 +17,12 @@
  *
  */
 
-namespace ommu\trait;
+namespace ommu\traits;
 
 use Yii;
 use yii\helpers\Html;
 
-trait GridViewSystem {
+trait GridViewTrait {
 	
 	/**
 	 * Generates key index defaultColumns in models
