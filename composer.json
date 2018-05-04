@@ -1,0 +1,35 @@
+{
+	"name": "ommu/yii2-traits",
+	"description": "Yii2 Traits from Ommu Platform",
+	"keywords": [
+		"yii",
+		"library",
+		"ommu",
+		"ommu platform"
+	],
+	"homepage": "https://github.com/ommu/yii2-traits",
+	"type": "ommu-library",
+	"license": "Apache-2.0",
+	"support": {
+		"issues": "https://github.com/ommu/yii2-traits/issues",
+		"wiki": "https://github.com/ommu/yii2-traits/wiki",
+		"source": "https://github.com/ommu/yii2-traits"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/ommu/yii2-traits.git"
+	},
+	"authors": [
+		{
+			"name": "Putra Sudaryanto",
+			"email": "putra@sudaryanto.id",
+			"homepage": "https://putra.sudaryanto.id",
+			"role": "Creator"
+		}
+	],
+	"require": {
+		"php": "~7.0",
+		"oomphinc/composer-installers-extender": "^1.0",
+		"yiisoft/yii2": "~2.0.13"
+	}
+}
