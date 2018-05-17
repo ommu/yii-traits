@@ -5,7 +5,7 @@
 		"yii",
 		"library",
 		"ommu",
-		"ommu platform"
+		"ommu-platform"
 	],
 	"homepage": "https://github.com/ommu/yii2-traits",
 	"type": "ommu-library",

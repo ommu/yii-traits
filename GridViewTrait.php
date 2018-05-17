@@ -22,10 +22,44 @@ namespace ommu\traits;
 use Yii;
 use yii\helpers\Html;
 
-trait GridViewTrait {
+trait GridViewTrait 
+{
+	/**
+	 * activeDefaultColumns
+	 * @return array
+	 */
+	public function activeDefaultColumns($columns)
+	{
+		$column = [];
+
+		foreach($columns as $val) {
+			$keyIndex = $this->getKeyIndex($val);
+			if($keyIndex)
+				$column[] = $keyIndex;
+		}
+
+		return $column;
+	}
+
+	/**
+	 * getKeyIndex
+	 * @return array
+	 */
+	public function getKeyIndex($data)
+	{
+		if(!is_array($data))
+			return $data;
+
+		else {
+			if(array_key_exists('attribute', $data))
+				return $data['attribute'];
+		}
+
+		return false;
+	}
 	
 	/**
-	 * Generates key index defaultColumns in models
+	 * filterYesNo
 	 * @return array
 	 */
 	public function filterYesNo() 
@@ -37,7 +71,7 @@ trait GridViewTrait {
 	}
 	
 	/**
-	 * Generates key index defaultColumns in models
+	 * quickAction
 	 * @return array
 	 */
 	public function quickAction($url, $id, $type=null, $single=false)
