@@ -11,10 +11,14 @@
  * Contains many function that most used :
  *	formatFileType
  *	createUploadDirectory
+ *	resizeImage
  *
  */
 
 namespace ommu\traits;
+
+use Yii;
+use yii\imagine\Image;
 
 trait FileTrait 
 {
@@ -66,5 +70,16 @@ trait FileTrait
 		}
 		
 		return true;
+	}
+
+	/**
+	 * Resize and creates a thumbnail image.
+	 */
+	public function resizeImage($image, $width, $height, $quality=80)
+	{
+		$width = $width ? $width : null;
+		$height = $height ? $height : null;
+
+		Image::thumbnail($image, $width, $height)->save($image, ['quality' => $quality]);
 	}
 }
