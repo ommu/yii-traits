@@ -1,23 +1,24 @@
 {
-	"name": "ommu/yii2-traits",
-	"description": "Yii2 Traits from Ommu Platform",
+	"name": "ommu/yii-traits",
+	"description": "Yii Traits from Ommu Platform",
 	"keywords": [
-		"yii",
 		"library",
 		"ommu",
-		"ommu-platform"
+		"ommu-platform",
+		"yii",
+		"yii2"
 	],
-	"homepage": "https://github.com/ommu/yii2-traits",
+	"homepage": "https://github.com/ommu/yii-traits",
 	"type": "ommu-library",
 	"license": "Apache-2.0",
 	"support": {
-		"issues": "https://github.com/ommu/yii2-traits/issues",
-		"wiki": "https://github.com/ommu/yii2-traits/wiki",
-		"source": "https://github.com/ommu/yii2-traits"
+		"issues": "https://github.com/ommu/yii-traits/issues",
+		"wiki": "https://github.com/ommu/yii-traits/wiki",
+		"source": "https://github.com/ommu/yii-traits"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ommu/yii2-traits.git"
+		"url": "https://github.com/ommu/yii-traits.git"
 	},
 	"authors": [
 		{
@@ -27,15 +28,10 @@
 			"role": "Creator"
 		}
 	],
-	"require": {
-		"php": "~7.0",
-		"oomphinc/composer-installers-extender": "^1.0",
-		"yiisoft/yii2": "~2.0.13",
-        "yiisoft/yii2-imagine": "~2.0"
-	},
-	"autoload": {
-		"psr-4": {
-			"ommu\\traits\\": ""
+	"extra": {
+		"branch-alias": {
+			"dev-version-1.x": "1.x-dev",
+			"dev-version-2.x": "2.x-dev"
 		}
 	}
 }
