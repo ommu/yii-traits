@@ -1,23 +1,24 @@
 {
-	"name": "ommu/yii2-traits",
+	"name": "ommu/yii-traits",
 	"description": "Yii2 Traits from Ommu Platform",
 	"keywords": [
-		"yii",
 		"library",
+		"trait",
 		"ommu",
-		"ommu-platform"
+		"ommu-platform",
+		"yii2"
 	],
-	"homepage": "https://github.com/ommu/yii2-traits",
+	"homepage": "https://github.com/ommu/yii-traits",
 	"type": "ommu-library",
 	"license": "Apache-2.0",
 	"support": {
-		"issues": "https://github.com/ommu/yii2-traits/issues",
-		"wiki": "https://github.com/ommu/yii2-traits/wiki",
-		"source": "https://github.com/ommu/yii2-traits"
+		"issues": "https://github.com/ommu/yii-traits/issues",
+		"wiki": "https://github.com/ommu/yii-traits/wiki",
+		"source": "https://github.com/ommu/yii-traits"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ommu/yii2-traits.git"
+		"url": "https://github.com/ommu/yii-traits.git"
 	},
 	"authors": [
 		{
