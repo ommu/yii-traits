@@ -6,7 +6,7 @@
  * @contact (+62)856-299-4114
  * @copyright Copyright (c) 2018 Ommu Platform (opensource.ommu.co)
  * @created date 17 April 2018, 08:36 WIB
- * @link https://github.com/ommu/yii2-traits
+ * @link https://github.com/ommu/yii-traits
  *
  * Contains many function that most used :
  *	formatFileType
