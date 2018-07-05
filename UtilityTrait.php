@@ -52,7 +52,7 @@ trait UtilityTrait
 		foreach ($trans as $key => $val)
 			$str = preg_replace('#'.$key.'#i', $val, $str);
 
-		if ($lowercase === true)
+		if($lowercase === true)
 			$str = strtolower($str);
 
 		return trim(trim($str, $separator));
