@@ -10,6 +10,7 @@
  *
  * Contains many function that most used :
  *	urlTitle
+ *	flashMessage
  *	uniqueCode
  *	licenseCode
  *
@@ -56,6 +57,22 @@ trait UtilityTrait
 			$str = strtolower($str);
 
 		return trim(trim($str, $separator));
+	}
+
+	/**
+	 * Provide style for error message
+	 *
+	 * @param mixed $message
+	 * @param string $class "success, info, warning, danger"
+	 */
+	public function flashMessage($message, $class='success')
+	{
+		if($message != '') {
+			$result = '<div class="errorSummary alert '.$class.'">';
+			$result .= $message.'</div>';
+		}
+
+		return $result;
 	}
 
 	/**
