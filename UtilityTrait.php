@@ -4,7 +4,7 @@
  *
  * @author Putra Sudaryanto <putra@sudaryanto.id>
  * @contact (+62)856-299-4114
- * @copyright Copyright (c) 2018 Ommu Platform (opensource.ommu.co)
+ * @copyright Copyright (c) 2018 Ommu Platform (www.ommu.co)
  * @created date 12 May 2018, 22:47 WIB
  * @link https://github.com/ommu/yii-traits
  *
@@ -79,7 +79,7 @@ trait UtilityTrait
 	/**
 	 * User salt codes
 	 */
-	public static function uniqueCode($length=32, $str=2)
+	public function uniqueCode($length=32, $str=2)
 	{
 		$chars = "abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		srand((double)microtime()*time());
@@ -94,5 +94,32 @@ trait UtilityTrait
 		}
 
 		return $salt;
+	}
+
+	/**
+	 * get License
+	 */
+	public function getLicense($source='1234567890', $length=16, $char=4)
+	{
+		$mod = $length%$char;
+		if($mod == 0)
+			$sep = ($length/$char);
+		else
+			$sep = (int)($length/$char)+1;
+		
+		$sourceLength = strlen($source);
+		$random = '';
+		for ($i = 0; $i < $length; $i++)
+			$random .= $source[rand(0, $sourceLength - 1)];
+		
+		$license = '';
+		for ($i = 0; $i < $sep; $i++) {
+			if($i != $sep-1)
+				$license .= substr($random,($i*$char),$char).'-';
+			else
+				$license .= substr($random,($i*$char),$char);
+		}
+
+		return $license;
 	}
 }
