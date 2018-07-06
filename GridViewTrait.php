@@ -49,4 +49,17 @@ trait GridViewTrait
 
 		return $column;
 	}
+	
+	/**
+	 * filterYesNo
+	 *
+	 * @return array
+	 */
+	public function filterYesNo() 
+	{
+		return [
+			1 => Yii::t('phrase', 'Yes'),
+			0 => Yii::t('phrase', 'No'),
+		];
+	}
 }

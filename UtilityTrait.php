@@ -76,7 +76,9 @@ trait UtilityTrait
 	}
 
 	/**
-	 * User salt codes
+	 * uniqueCode
+	 *
+	 * @return string
 	 */
 	public function uniqueCode($length=32, $str=2)
 	{
@@ -96,7 +98,9 @@ trait UtilityTrait
 	}
 
 	/**
-	 * get License
+	 * licenseCode
+	 *
+	 * @return string
 	 */
 	public function licenseCode($source='1234567890', $length=16, $char=4)
 	{
@@ -120,5 +124,18 @@ trait UtilityTrait
 		}
 
 		return $license;
+	}
+	
+	/**
+	 * filterYesNo
+	 *
+	 * @return array
+	 */
+	public function filterYesNo() 
+	{
+		return [
+			1 => Yii::t('app', 'Yes'),
+			0 => Yii::t('app', 'No'),
+		];
 	}
 }
