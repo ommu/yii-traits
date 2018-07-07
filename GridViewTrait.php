@@ -72,6 +72,7 @@ trait GridViewTrait
 	
 	/**
 	 * quickAction
+	 *
 	 * @return array
 	 */
 	public function quickAction($url, $id, $type=null, $single=false)
