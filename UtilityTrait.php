@@ -125,17 +125,4 @@ trait UtilityTrait
 
 		return $license;
 	}
-	
-	/**
-	 * filterYesNo
-	 *
-	 * @return array
-	 */
-	public function filterYesNo() 
-	{
-		return [
-			1 => Yii::t('app', 'Yes'),
-			0 => Yii::t('app', 'No'),
-		];
-	}
 }

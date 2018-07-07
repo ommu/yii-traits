@@ -57,9 +57,34 @@ trait GridViewTrait
 	 */
 	public function filterYesNo() 
 	{
-		return [
+		return array(
 			1 => Yii::t('phrase', 'Yes'),
 			0 => Yii::t('phrase', 'No'),
-		];
+		);
+	}
+	
+	/**
+	 * quickAction
+	 *
+	 * @return array
+	 */
+	public function quickAction($url, $id, $type=null, $single=false)
+	{
+		return $url;
+		if($type == null)
+			$type = 'Publish,Unpublish';
+		$typeArray = explode(',', $type);
+
+		$text = $id == 1 ? $typeArray[0] : $typeArray[1];
+		$title = $id == 1 ? $typeArray[1] : $typeArray[0];
+
+		if($single == true && $id == 1)
+			return Yii::t('phrase', ucwords(strtolower($typeArray[0])));
+			
+		else {
+			return CHtml::link(Yii::t('phrase', ucwords(strtolower($text))), $url, array(
+				'title' => Yii::t('phrase', ucwords(strtolower($title))),
+			));
+		}
 	}
 }
