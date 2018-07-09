@@ -99,7 +99,7 @@ trait GridViewTrait
 		$attrValue = Yii::app()->getRequest()->getParam($class)[$attribute];
 		if(Yii::app()->params['grid-view']['JuiDatepicker'])
 		{
-			return Yii::app()->controller->widget('application.libraries.core.components.system.CJuiDatePicker', array(
+			return Yii::app()->controller->widget('zii.widgets.jui.CJuiDatePicker', array(
 				'model'=>$model,
 				'attribute'=>$attribute,
 				'language' => 'en',
