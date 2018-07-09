@@ -87,4 +87,42 @@ trait GridViewTrait
 			));
 		}
 	}
+
+	/**
+	 * filterDatepicker
+	 *
+	 * @return string input
+	 */
+	public function filterDatepicker($model, $attribute)
+	{
+		$class = trim(get_class($model));
+		$attrValue = Yii::app()->getRequest()->getParam($class)[$attribute];
+		if(Yii::app()->params['grid-view']['JuiDatepicker'])
+		{
+			return Yii::app()->controller->widget('application.libraries.core.components.system.CJuiDatePicker', array(
+				'model'=>$model,
+				'attribute'=>$attribute,
+				'language' => 'en',
+				'i18nScriptFile' => 'jquery-ui-i18n.min.js',
+				//'mode'=>'datetime',
+				'htmlOptions' => array(
+					'value' => $attrValue,
+					'id' => $attribute.'_filter',
+					'on_datepicker' => 'on',
+					'placeholder' => Yii::t('phrase', 'filter'),
+				),
+				'options'=>array(
+					'showOn' => 'focus',
+					'dateFormat' => 'yy-mm-dd',
+					'showOtherMonths' => true,
+					'selectOtherMonths' => true,
+					'changeMonth' => true,
+					'changeYear' => true,
+					'showButtonPanel' => true,
+				),
+			), true);
+
+		} else 
+			return CHtml::activeDateField($model, $attribute, array('value'=>$attrValue, 'placeholder'=>'filter'));
+	}
 }
