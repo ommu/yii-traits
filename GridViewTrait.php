@@ -11,6 +11,9 @@
  * Contains many function that most used :
  *	keyIndex
  *	activeDefaultColumns
+ *	filterYesNo
+ *	quickAction
+ *	filterDatepicker
  *
  */
 
@@ -93,13 +96,13 @@ trait GridViewTrait
 	 *
 	 * @return string input
 	 */
-	public function filterDatepicker($model, $attribute)
+	public function filterDatepicker($model, $attribute, $filter=true)
 	{
 		$class = trim(get_class($model));
 		$attrValue = Yii::app()->getRequest()->getParam($class)[$attribute];
 		if(Yii::app()->params['grid-view']['JuiDatepicker'])
 		{
-			return Yii::app()->controller->widget('zii.widgets.jui.CJuiDatePicker', array(
+			$options = array(
 				'model'=>$model,
 				'attribute'=>$attribute,
 				'language' => 'en',
@@ -107,9 +110,6 @@ trait GridViewTrait
 				//'mode'=>'datetime',
 				'htmlOptions' => array(
 					'value' => $attrValue,
-					'id' => $attribute.'_filter',
-					'on_datepicker' => 'on',
-					'placeholder' => Yii::t('phrase', 'filter'),
 				),
 				'options'=>array(
 					'showOn' => 'focus',
@@ -120,9 +120,26 @@ trait GridViewTrait
 					'changeYear' => true,
 					'showButtonPanel' => true,
 				),
-			), true);
+			);
+			if($filter == true) {
+				$options['htmlOptions']['id'] = $attribute.'_filter';
+				$options['htmlOptions']['on_datepicker'] = 'on';
+				$options['htmlOptions']['placeholder'] = Yii::t('phrase', 'filter');
+			} else 
+				$options['htmlOptions']['class'] = 'form-control';
 
-		} else 
-			return CHtml::activeDateField($model, $attribute, array('value'=>$attrValue, 'placeholder'=>'filter'));
+			return Yii::app()->controller->widget('zii.widgets.jui.CJuiDatePicker', $options, true);
+
+		} else {
+			$options = array(
+				'value'=>$attrValue,
+			);
+			if($filter == true)
+				$options['placeholder'] = Yii::t('phrase', 'filter');
+			else
+				$options['class'] = 'form-control';
+
+			return CHtml::activeDateField($model, $attribute, $options);
+		}
 	}
 }

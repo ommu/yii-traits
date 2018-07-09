@@ -13,6 +13,7 @@
  *	flashMessage
  *	uniqueCode
  *	licenseCode
+ *	dateFormat
  *
  */
 
@@ -124,5 +125,25 @@ trait UtilityTrait
 		}
 
 		return $license;
+	}
+	
+	/**
+	 * Get format date from locale setting
+	 * 
+	 * @return string
+	 */
+	public function dateFormat($date, $time=false) 
+	{
+		if(is_numeric($date) && (int)$date == $date)
+			$date = date('Y-m-d H:i:s', $date);
+		
+		$setting = OmmuSettings::model()->findByPk(1, array(
+			'select' => 'site_dateformat, site_timeformat',
+		));
+		
+		if($time == true)
+			return date($setting->site_dateformat, strtotime($date)).' '.date($setting->site_timeformat, strtotime($date)).' WIB';
+		else
+			return date($setting->site_dateformat, strtotime($date));
 	}
 }
