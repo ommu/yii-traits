@@ -132,18 +132,8 @@ trait UtilityTrait
 	 * 
 	 * @return string
 	 */
-	public function dateFormat($date, $time=false) 
+	public function dateFormat($datetime, $date='full', $time='full')
 	{
-		if(is_numeric($date) && (int)$date == $date)
-			$date = date('Y-m-d H:i:s', $date);
-		
-		$setting = OmmuSettings::model()->findByPk(1, array(
-			'select' => 'site_dateformat, site_timeformat',
-		));
-		
-		if($time == true)
-			return date($setting->site_dateformat, strtotime($date)).' '.date($setting->site_timeformat, strtotime($date)).' WIB';
-		else
-			return date($setting->site_dateformat, strtotime($date));
+		return Yii::app()->dateFormatter->formatDateTime($datetime, $date, $time);
 	}
 }
