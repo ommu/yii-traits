@@ -42,9 +42,9 @@ class OActiveRecord extends CActiveRecord
 			}
 			return $this->defaultColumns;
 		}
-
+		
 		foreach($columns as $val) {
-			if(!in_array($val, $this->gridForbiddenColumn) && !in_array($val, $this->defaultColumns)) {
+			if(array_key_exists($val, $this->templateColumns) && !in_array($val, $this->defaultColumns)) {
 				$col = $this->getTemplateColumn($val);
 				if($col != null)
 					$this->defaultColumns[] = $col;

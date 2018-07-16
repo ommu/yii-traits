@@ -14,6 +14,7 @@
  *	filterYesNo
  *	quickAction
  *	filterDatepicker
+ *	gridColumnTemp
  *
  */
 
@@ -141,5 +142,24 @@ trait GridViewTrait
 
 			return CHtml::activeDateField($model, $attribute, $options);
 		}
+	}
+	
+	/**
+	 * gridColumnTemp
+	 *
+	 * @return array
+	 */
+	public function gridColumnTemp()
+	{
+		$gridColumn = Yii::app()->getRequest()->getParam('GridColumn');
+		$columnTemp = array();
+		if($gridColumn) {
+			foreach($gridColumn as $key => $val) {
+				if($gridColumn[$key] == 1)
+					$columnTemp[] = $key;
+			}
+		}
+		
+		return $columnTemp;
 	}
 }
