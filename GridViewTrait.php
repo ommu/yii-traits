@@ -72,22 +72,44 @@ trait GridViewTrait
 	 *
 	 * @return array
 	 */
-	public function quickAction($url, $id, $type=null, $single=false)
+	public function quickAction($url, $id, $alert=null, $single=false)
 	{
-		return $url;
-		if($type == null)
-			$type = 'Publish,Unpublish';
-		$typeArray = explode(',', $type);
+		$cs = Yii::app()->getClientScript();
+$js=<<<EOP
+	var linkBG = location.href;
+	function quickAction(url) {
+		$.ajax({
+			type: 'post',
+			url: url,
+			dataType: 'json',
+			success: function(response) {
+				window.location = linkBG;
+				$(a[href=url]).parents('#ajax-message').html(response.msg).fadeIn();
+			},
+			error: function(jqXHR, textStatus, error) {
+				location.href = url;
+			}
+		});	
+	}
+EOP;
+		$cs->registerScript('quick-action', $js, CClientScript::POS_END);
 
-		$text = $id == 1 ? $typeArray[0] : $typeArray[1];
-		$title = $id == 1 ? $typeArray[1] : $typeArray[0];
+		if($alert == null)
+			$alert = 'Publish,Unpublish';
+		$alertArray = explode(',', $alert);
+
+		$text = $id == 1 ? $alertArray[0] : $alertArray[1];
+		$title = $id == 1 ? $alertArray[1] : $alertArray[0];
 
 		if($single == true && $id == 1)
-			return Yii::t('phrase', ucwords(strtolower($typeArray[0])));
+			return Yii::t('phrase', ucwords(strtolower($alertArray[0])));
 			
 		else {
 			return CHtml::link(Yii::t('phrase', ucwords(strtolower($text))), $url, array(
 				'title' => Yii::t('phrase', ucwords(strtolower($title))),
+				'confirm' => Yii::t('phrase', 'Are you sure you want to '.strtolower($title).' this item?'),
+				'method' => 'post',
+				'onclick' => 'quickAction(this);return false;',
 			));
 		}
 	}
