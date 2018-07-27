@@ -11,6 +11,7 @@
  * Contains many function that most used :
  *	formatFileType
  *	createUploadDirectory
+ *	deleteFolder
  *
  */
 
@@ -64,5 +65,33 @@ trait FileTrait
 		}
 		
 		return true;
+	}
+
+	/**
+	 * remove folder and file
+	 */
+	public function deleteFolder($path)
+	{
+		if(file_exists($path)) {
+			$fh = dir($path);
+			//print_r($fh);
+			while (false !== ($files = $fh->read())) {
+				/*
+				echo $fh->path.'/'.$files."\n";
+				chmod($fh->path.'/'.$files, 0755);
+				if(@unlink($fh->path.'/'.$files))
+					echo '1'."\n";
+				else
+					echo '0'."\n";
+				*/
+				@unlink($fh->path.'/'.$files);
+			}
+			$fh->close();
+			@rmdir($path);
+
+			return true;
+
+		} else 
+			return false;
 	}
 }
