@@ -12,6 +12,7 @@
  *	currentTemplate
  *	applyCurrentTheme
  *	applyViewPath
+ *	themeInfo
  *
  */
 
@@ -77,5 +78,28 @@ trait ThemeTrait
 			} else
 				Yii::app()->controller->module->viewPath = join('/', [$modulePath, $module, 'views']);
 		}
+	}
+	
+	/**
+	* Return setting template with typePage: public, admin_sweeto or back_office
+	*/
+	public function themeInfo($theme, $type=null)
+	{
+		define('DS', DIRECTORY_SEPARATOR);
+		Yii::import('mustangostang.spyc.Spyc');
+
+		if($theme == null)
+			return false;
+			
+		$themePath = Yii::getPathOfAlias('webroot.themes.'.$theme).DS.$theme.'.yaml';
+		$themeYML = Spyc::YAMLLoad($themePath);
+		
+		if(empty($themeYML))
+			return false;
+
+		if($type == null)
+			return $themeYML;
+		else
+			return $themeYML[$type];
 	}
 }

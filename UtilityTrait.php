@@ -14,6 +14,7 @@
  *	uniqueCode
  *	licenseCode
  *	dateFormat
+ *	parseYML
  *
  */
 
@@ -135,5 +136,23 @@ trait UtilityTrait
 	public function dateFormat($datetime, $date='full', $time='full')
 	{
 		return Yii::app()->dateFormatter->formatDateTime($datetime, $date, $time);
+	}
+	
+	/**
+	* Return setting template with typePage: public, admin_sweeto or back_office
+	*/
+	public static function parseYML($path)
+	{
+		Yii::import('mustangostang.spyc.Spyc');
+
+		if(!file_exists($path))
+			return false;
+			
+		$arraySpyc = Spyc::YAMLLoad($path);	
+		
+		if(empty($arraySpyc))
+			return false;
+			
+		return $arraySpyc;
 	}
 }
