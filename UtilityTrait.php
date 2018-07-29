@@ -15,6 +15,7 @@
  *	licenseCode
  *	dateFormat
  *	parseYML
+ *	parseTemplate
  *
  */
 
@@ -154,5 +155,28 @@ trait UtilityTrait
 			return false;
 			
 		return $arraySpyc;
+	}
+
+	/**
+	 * Method for parsing string
+	 * 
+	 * @param string $message Source string for parsing
+	 * @param array $attribute of example
+	 * [
+	 *		'{link}' => 'https://github.com/ommu/mod-mailer',
+	 *		'{author}' => Yii::$app->user->email
+	 *	]
+	 * 
+	 * @return string
+	 */
+	public function parseTemplate($message, $attribute)
+	{
+		foreach ($attribute as $key => $value) {
+			$message = strtr($message, [
+				'{'.$key.'}' => $value,
+			]);
+		}
+
+		return $message;
 	}
 }
