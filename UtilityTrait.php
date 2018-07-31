@@ -169,12 +169,14 @@ trait UtilityTrait
 	 * 
 	 * @return string
 	 */
-	public function parseTemplate($message, $attribute)
+	public function parseTemplate($message, $attribute=null)
 	{
-		foreach ($attribute as $key => $value) {
-			$message = strtr($message, [
-				'{'.$key.'}' => $value,
-			]);
+		if($attribute != null) {
+			foreach ($attribute as $key => $value) {
+				$message = strtr($message, [
+					'{'.$key.'}' => $value,
+				]);
+			}
 		}
 
 		return $message;
