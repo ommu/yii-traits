@@ -12,7 +12,7 @@
  *
  */
 
-Yii::import('zii.widgets.CBaseListView');
+Yii::import('application.libraries.yii-traits.system.CBaseListView');
 Yii::import('application.libraries.yii-traits.system.CDataColumn');
 Yii::import('zii.widgets.grid.CLinkColumn');
 Yii::import('application.libraries.yii-traits.system.CButtonColumn');
@@ -68,7 +68,7 @@ Yii::import('zii.widgets.grid.CCheckBoxColumn');
  *             'value'=>'$data->author->username',
  *         ),
  *         array(            // display a column with "view", "update" and "delete" buttons
- *             'class'=>'CButtonColumn',
+ *             'class' => 'CButtonColumn',
  *         ),
  *     ),
  * ));
