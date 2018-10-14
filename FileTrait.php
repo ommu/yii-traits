@@ -46,7 +46,7 @@ trait FileTrait
 		
 		// Add directory
 		if(!file_exists($uploadPath) || !file_exists($verwijderenPath)) {
-			if($key != null)
+			if(!file_exists($path))
 				@mkdir($path, 0755, true);
 			@mkdir($uploadPath, 0755, true);
 			@mkdir($verwijderenPath, 0755, true);

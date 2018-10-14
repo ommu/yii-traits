@@ -16,6 +16,7 @@
  *	dateFormat
  *	parseYML
  *	parseTemplate
+ *	parseYesNo
  *
  */
 
@@ -180,5 +181,25 @@ trait UtilityTrait
 		}
 
 		return $message;
+	}
+
+	/**
+	 * Method for parsing yes no condition
+	 * 
+	 * @return string
+	 */
+	public function parseYesNo($value, $icon=true)
+	{
+		$items = array(
+			1 => Yii::t('phrase', 'Yes'),
+			0 => Yii::t('phrase', 'No'),
+		);
+		$baseUrl = !empty(Yii::app()->theme->name) ? Yii::app()->theme->baseUrl : Yii::app()->request->baseUrl;
+		$image = $value == '0' ? $baseUrl.'/images/icons/unpublish.png' : $baseUrl.'/images/icons/publish.png';
+
+		if($icon == false)
+			return $items[$value];
+		else
+			return CHtml::image($image, $items[$value]);
 	}
 }
