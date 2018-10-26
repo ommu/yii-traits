@@ -12,10 +12,16 @@
  *	urlTitle
  *	flashMessage
  *	uniqueCode
+ *	getLicense
+ *	quickAction
+ *	filterYesNo
  *
  */
 
 namespace ommu\traits;
+
+use Yii;
+use yii\helpers\Html;
 
 trait UtilityTrait
 {
@@ -121,5 +127,52 @@ trait UtilityTrait
 		}
 
 		return $license;
+	}
+	
+	/**
+	 * quickAction
+	 *
+	 * @return array
+	 */
+	public function quickAction($url, $id, $type=null, $single=false)
+	{
+		if($type == null)
+			$type = 'Publish,Unpublish';
+		$typeArray = explode(',', $type);
+
+		$text = $id == 1 ? Yii::t('app', $typeArray[0]) : Yii::t('app', $typeArray[1]);
+		$title = $id == 1 ? Yii::t('app', $typeArray[1]) : Yii::t('app', $typeArray[0]);
+		$message = Yii::t('app', 'Are you sure you want to {$text} this item?', array(
+			'{$text}'=>strtolower($title),
+		));
+
+		if($single == true && $id == 1)
+			return Yii::t('app', ucwords(strtolower($typeArray[0])));
+			
+		else {
+			return Html::a(ucwords(strtolower($text)), $url, [
+				'title' => ucwords(strtolower($title)),
+				'data-confirm' => $message,
+				'data-method' => 'post',
+			]);
+		}
+	}
+	
+	/**
+	 * filterYesNo
+	 * 
+	 * @return array
+	 */
+	public function filterYesNo($value=null) 
+	{
+		$items = [
+			1 => Yii::t('app', 'Yes'),
+			0 => Yii::t('app', 'No'),
+		];
+
+		if($value != null)
+			return $items[$value];
+		else
+			return $items;
 	}
 }
