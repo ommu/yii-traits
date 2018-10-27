@@ -166,13 +166,13 @@ trait UtilityTrait
 	public function filterYesNo($value=null) 
 	{
 		$items = [
-			1 => Yii::t('app', 'Yes'),
 			0 => Yii::t('app', 'No'),
+			1 => Yii::t('app', 'Yes'),
 		];
 
-		if($value != null)
+		if($value !== null)
 			return $items[$value];
-		else
-			return $items;
+		
+		return $items;
 	}
 }
