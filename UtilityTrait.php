@@ -15,6 +15,7 @@
  *	getLicense
  *	quickAction
  *	filterYesNo
+ *	filterDatepicker
  *
  */
 
@@ -174,5 +175,23 @@ trait UtilityTrait
 			return $items[$value];
 		
 		return $items;
+	}
+
+	/**
+	 * filterDatepicker
+	 *
+	 * @return string input
+	 */
+	public function filterDatepicker($model, $attribute)
+	{
+		if(Yii::$app->params['gridView']['JuiDatepicker']) {
+			return \yii\jui\DatePicker::widget([
+				'dateFormat' => 'yyyy-MM-dd',
+				'attribute' => $attribute,
+				'model'  => $model,
+			]);
+		}
+
+		return Html::input('date', $attribute, Yii::$app->request->get($attribute), ['class'=>'form-control']);
 	}
 }
