@@ -12,7 +12,7 @@
  *	urlTitle
  *	flashMessage
  *	uniqueCode
- *	getLicense
+ *	licenseCode
  *	quickAction
  *	filterYesNo
  *	filterDatepicker
@@ -106,7 +106,7 @@ trait UtilityTrait
 	/**
 	 * get License
 	 */
-	public function getLicense($source='1234567890', $length=16, $char=4)
+	public function licenseCode($source='1234567890', $length=16, $char=4)
 	{
 		$mod = $length%$char;
 		if($mod == 0)
