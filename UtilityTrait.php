@@ -184,11 +184,11 @@ trait UtilityTrait
 	 */
 	public function filterDatepicker($model, $attribute)
 	{
-		if(Yii::$app->params['gridView']['JuiDatepicker']) {
+		if(Yii::$app->params['gridView']['JuiDatepicker'] == true) {
 			return \yii\jui\DatePicker::widget([
-				'dateFormat' => 'yyyy-MM-dd',
+				'model' => $model,
 				'attribute' => $attribute,
-				'model'  => $model,
+				'dateFormat' => 'yyyy-MM-dd',
 			]);
 		}
 
