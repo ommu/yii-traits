@@ -194,4 +194,17 @@ trait UtilityTrait
 
 		return Html::input('date', $attribute, Yii::$app->request->get($attribute), ['class'=>'form-control']);
 	}
+
+	/**
+	 * formatterAsDate
+	 *
+	 * @return string date
+	 */
+	public function formatterAsDate($date, $format='long')
+	{
+		if(!in_array($date, ['0000-00-00 00:00:00','1970-01-01 00:00:00','0002-12-02 07:07:12','-0001-11-30 00:00:00']))
+			return Yii::$app->formatter->asDate($data, $format);
+
+		return false;
+	}
 }
