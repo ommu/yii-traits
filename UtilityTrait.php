@@ -16,6 +16,7 @@
  *	quickAction
  *	filterYesNo
  *	filterDatepicker
+ *	formatterAsDate
  *
  */
 
@@ -143,8 +144,8 @@ trait UtilityTrait
 
 		$text = $id == 1 ? Yii::t('app', $alertArray[0]) : Yii::t('app', $alertArray[1]);
 		$title = $id == 1 ? Yii::t('app', $alertArray[1]) : Yii::t('app', $alertArray[0]);
-		$message = Yii::t('app', 'Are you sure you want to {$text} this item?', array(
-			'{$text}'=>strtolower($title),
+		$message = Yii::t('app', 'Are you sure you want to {text} this item?', array(
+			'text'=>strtolower($title),
 		));
 
 		if($single == true && $id == 1)
