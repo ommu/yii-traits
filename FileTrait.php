@@ -29,12 +29,12 @@ trait FileTrait
 	 * @param bool $type true (explode), false (implode)
 	 * @param string $separator Word separator (usually '-' or '_')
 	 */
-	public function formatFileType($data, $type=true, $separator=',') 
+	public function formatFileType($data, $type=true, $separator=', ') 
 	{
 		if($type == true)
 			$result = array_map("trim", explode($separator, $data));
 		else
-			$result = implode($separator.' ', $data);
+			$result = implode($separator, $data);
 			
 		return $result; 
 	}
