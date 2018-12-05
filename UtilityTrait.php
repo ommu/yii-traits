@@ -11,12 +11,10 @@
  * Contains many function that most used :
  *	urlTitle
  *	flashMessage
- *	uniqueCode
  *	licenseCode
  *	quickAction
  *	filterYesNo
  *	filterDatepicker
- *	formatterAsDate
  *
  */
 
@@ -82,26 +80,6 @@ trait UtilityTrait
 		}
 
 		return $result;
-	}
-
-	/**
-	 * User salt codes
-	 */
-	public function uniqueCode($length=32, $str=2)
-	{
-		$chars = "abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		srand((double)microtime()*time());
-		$i = 1;
-		$salt = '' ;
-
-		while ($i <= $length) {
-			$num = rand() % 33;
-			$tmp = substr($chars, $num, $str);
-			$salt = $salt . $tmp; 
-			$i++;
-		}
-
-		return $salt;
 	}
 
 	/**
@@ -194,18 +172,5 @@ trait UtilityTrait
 		}
 
 		return Html::input('date', $attribute, Yii::$app->request->get($attribute), ['class'=>'form-control']);
-	}
-
-	/**
-	 * formatterAsDate
-	 *
-	 * @return string date
-	 */
-	public function formatterAsDate($date, $format='long')
-	{
-		if(!in_array($date, ['0000-00-00 00:00:00','1970-01-01 00:00:00','0002-12-02 07:07:12','-0001-11-30 00:00:00']))
-			return Yii::$app->formatter->asDate($data, $format);
-
-		return false;
 	}
 }
