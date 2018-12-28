@@ -4,7 +4,7 @@
  *
  * @author Putra Sudaryanto <putra@sudaryanto.id>
  * @contact (+62)856-299-4114
- * @copyright Copyright (c) 2018 Ommu Platform (www.ommu.co)
+ * @copyright Copyright (c) 2018 OMMU (www.ommu.co)
  * @created date 12 May 2018, 22:47 WIB
  * @link https://github.com/ommu/yii-traits
  *
