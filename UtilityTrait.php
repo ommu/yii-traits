@@ -14,7 +14,6 @@
  *	licenseCode
  *	quickAction
  *	filterYesNo
- *	filterDatepicker
  *
  */
 
@@ -118,16 +117,23 @@ trait UtilityTrait
 	{
 		if($alert == null)
 			$alert = 'Publish,Unpublish';
-		$alertArray = explode(',', $alert);
+		$alertArray = explode('#', $alert);
 
-		$text = $id == 1 ? Yii::t('app', $alertArray[0]) : Yii::t('app', $alertArray[1]);
-		$title = $id == 1 ? Yii::t('app', $alertArray[1]) : Yii::t('app', $alertArray[0]);
+		$textArray = $titleArray = explode(',', $alert);
+		if(count($alertArray) != 1) {
+			$textArray = explode(',', $alertArray[0]);
+			$titleArray = explode(',', $alertArray[1]);
+		}
+
+
+		$text = $id == 1 ? Yii::t('app', $textArray[0]) : Yii::t('app', $textArray[1]);
+		$title = $id == 1 ? Yii::t('app', $titleArray[1]) : Yii::t('app', $titleArray[0]);
 		$message = Yii::t('app', 'Are you sure you want to {text} this item?', array(
 			'text'=>strtolower($title),
 		));
 
 		if($single == true && $id == 1)
-			return Yii::t('app', ucwords(strtolower($alertArray[0])));
+			return Yii::t('app', ucwords(strtolower($textArray[0])));
 			
 		else {
 			return Html::a(ucwords(strtolower($text)), $url, [
@@ -154,23 +160,5 @@ trait UtilityTrait
 			return $items[$value];
 		
 		return $items;
-	}
-
-	/**
-	 * filterDatepicker
-	 *
-	 * @return string input
-	 */
-	public function filterDatepicker($model, $attribute)
-	{
-		if(Yii::$app->params['gridView']['JuiDatepicker'] == true) {
-			return \yii\jui\DatePicker::widget([
-				'model' => $model,
-				'attribute' => $attribute,
-				'dateFormat' => 'yyyy-MM-dd',
-			]);
-		}
-
-		return Html::input('date', $attribute, Yii::$app->request->get($attribute), ['class'=>'form-control']);
 	}
 }

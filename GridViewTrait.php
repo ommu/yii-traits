@@ -12,8 +12,9 @@
  * seperti fungsi filter yes/no, quick-action dll.
  *
  * Contains many function that most used :
- *	filterYesNo
- *	quickAction
+ *	activeDefaultColumns
+ *	getKeyIndex
+ *	filterDatepicker
  *
  */
 
@@ -56,5 +57,23 @@ trait GridViewTrait
 		}
 
 		return false;
+	}
+
+	/**
+	 * filterDatepicker
+	 *
+	 * @return string input
+	 */
+	public function filterDatepicker($model, $attribute)
+	{
+		if(Yii::$app->params['gridView']['JuiDatepicker'] == true) {
+			return \yii\jui\DatePicker::widget([
+				'model' => $model,
+				'attribute' => $attribute,
+				'dateFormat' => 'yyyy-MM-dd',
+			]);
+		}
+
+		return Html::input('date', $attribute, Yii::$app->request->get($attribute), ['class'=>'form-control']);
 	}
 }
