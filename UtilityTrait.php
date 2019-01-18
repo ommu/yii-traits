@@ -137,7 +137,7 @@ trait UtilityTrait
 			
 		else {
 			return Html::a(ucwords(strtolower($text)), $url, [
-				'title' => ucwords(strtolower($title)),
+				'title' => Yii::t('app', 'Click to {title}', array('title'=>strtolower($title))),
 				'data-confirm' => $message,
 				'data-method' => 'post',
 			]);
