@@ -66,7 +66,7 @@ trait GridViewTrait
 	 */
 	public function filterDatepicker($model, $attribute)
 	{
-		if(Yii::$app->params['gridView']['JuiDatepicker'] == true) {
+		if(Yii::$app->params['gridView']['datepicker'] == true) {
 			return \yii\jui\DatePicker::widget([
 				'model' => $model,
 				'attribute' => $attribute,
