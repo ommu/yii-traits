@@ -9,7 +9,8 @@
  * @link https://github.com/ommu/yii-traits
  *
  * Contains many function that most used :
- *	urlTitle
+ *	themeParseYaml
+ *	themeMenu
  *
  */
 

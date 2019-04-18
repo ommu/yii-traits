@@ -6,6 +6,7 @@
  * @contact (+62)856-299-4114
  * @copyright Copyright (c) 2018 OMMU (www.ommu.co)
  * @created date 12 May 2018, 22:47 WIB
+ * @modified date 18 April 2019, 10:06 WIB
  * @link https://github.com/ommu/yii-traits
  *
  * Contains many function that most used :
@@ -14,6 +15,9 @@
  *	licenseCode
  *	quickAction
  *	filterYesNo
+ *	convertSmartQuotes
+ *	htmlSoftDecode
+ *	htmlHardDecode
  *
  */
 
@@ -160,5 +164,60 @@ trait UtilityTrait
 			return $items[$value];
 		
 		return $items;
+	}
+
+	/**
+	 * replace smart quotes or franky ugly char by micrsooft word 'copas'
+	 * 
+	 * @return sting
+	 */
+	public static function convertSmartQuotes($string)
+	{
+		$search = array(chr(145), chr(146), chr(147), chr(148), chr(151), chr(150), chr(133), chr(149));
+		$replace = array("'", "'", '"', '"', '--', '-', '...', "&bull;");
+		return str_replace($search, $replace, $string);
+	}
+
+	/**
+	 * Cleaning html entities for detail view, so it still 
+	 * html tag<p> or <strong>,etc
+	 * 
+	 * @return sting
+	 */
+	public static function htmlSoftDecode($string)
+	{
+		/*
+		$data = htmlspecialchars_decode($string);
+		$data= html_entity_decode($string);
+		$data = ereg_replace("&quot;", chr(34),$data);
+		$data = ereg_replace("&lt;", chr(60),$data);
+		$data = ereg_replace("&gt;", chr(62),$data);
+		$data = ereg_replace("&amp;", chr(38),$data);
+		$data = ereg_replace("&nbsp;", chr(32),$data);
+		$data = ereg_replace("&amp;nbsp;", "",$data);
+		$data= html_entity_decode($data);
+		*/
+
+		$data = get_html_translation_table(HTML_SPECIALCHARS, ENT_QUOTES);
+		$data = array_flip($data);
+		$original = strtr($string, $data);
+
+		return $original;
+	}
+
+	/**
+	 * Super Cleaning for decode and strip all html tag
+	 * 
+	 * @return sting
+	 */
+	public static function htmlHardDecode($string)
+	{
+		$data = htmlspecialchars_decode($string);
+		$data = html_entity_decode($data);
+		$data = strip_tags($data);
+		$data = chop(self::convertSmartQuotes($data));
+		$data = str_replace(array("\r", "\n", "	"), "", $data);
+
+		return ($data);
 	}
 }
