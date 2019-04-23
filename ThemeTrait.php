@@ -25,7 +25,7 @@ trait ThemeTrait
 	/**
 	 * {@inheritdoc}
 	 */
-	public function themeParseYaml($theme)
+	public static function themeParseYaml($theme)
 	{
 		$themePath = Yii::getAlias(Yii::$app->params['themePath']);
 		$themeFile = $themePath . DIRECTORY_SEPARATOR . $theme . DIRECTORY_SEPARATOR . $theme.'.yaml';
@@ -40,7 +40,7 @@ trait ThemeTrait
 	 */
 	public function themeMenu($theme)
 	{
-		$yaml = $this->themeParseYaml($theme);
+		$yaml = self::themeParseYaml($theme);
 
 		return is_array($yaml) ? $yaml['theme_menu'] : [];
 	}
