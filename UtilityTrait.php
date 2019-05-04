@@ -11,7 +11,6 @@
  *
  * Contains many function that most used :
  *	urlTitle
- *	flashMessage
  *	licenseCode
  *	quickAction
  *	filterYesNo
@@ -67,22 +66,6 @@ trait UtilityTrait
 			$str = strtolower($str);
 
 		return trim(trim($str, $separator));
-	}
-
-	/**
-	 * Provide style for error message
-	 *
-	 * @param mixed $msg
-	 * @param string $type "success, info, warning, danger"
-	 */
-	public function flashMessage($message, $class='success')
-	{
-		if($message != '') {
-			$result = '<div class="alert alert-'.$class.' alert-dismissible fade in">';
-			$result .= $message.'</div>';
-		}
-
-		return $result;
 	}
 
 	/**
