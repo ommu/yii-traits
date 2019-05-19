@@ -82,4 +82,23 @@ trait FileTrait
 
 		Image::thumbnail($image, $width, $height)->save($image, ['quality' => $quality]);
 	}
+
+	/**
+	 * Remove folder and recursive file
+	 */
+	public function deleteFolder($path) 
+	{
+		if(file_exists($path)) {
+			$fh = dir($path);
+			while (false !== ($files = $fh->read())) {
+				@unlink($fh->path.'/'.$files);
+			}
+			$fh->close();
+			@rmdir($path);
+
+			return true;
+
+		} else 
+			return false;
+	}
 }
