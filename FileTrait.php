@@ -12,6 +12,7 @@
  *	formatFileType
  *	createUploadDirectory
  *	resizeImage
+ *	deleteFolder
  *
  */
 
