@@ -2,7 +2,7 @@
 /**
  * FileTrait
  *
- * @author Putra Sudaryanto <putra@sudaryanto.id>
+ * @author Putra Sudaryanto <putra@ommu.co>
  * @contact (+62)856-299-4114
  * @copyright Copyright (c) 2018 OMMU (www.ommu.co)
  * @created date 17 April 2018, 08:36 WIB
@@ -33,7 +33,7 @@ trait FileTrait
 	public function formatFileType($data, $type=true, $separator=', ') 
 	{
 		if($type == true)
-			$result = array_map("trim", explode($separator, $data));
+			$result = array_map('trim', explode($separator, $data));
 		else
 			$result = implode($separator, $data);
 			
