@@ -1,6 +1,6 @@
 {
 	"name": "ommu/yii-traits",
-	"description": "Yii2 Traits from Ommu Platform",
+	"description": "Yii2 Traits from OMMU",
 	"type": "ommu-library",
 	"keywords": [
 		"library",
@@ -23,14 +23,15 @@
 	"authors": [
 		{
 			"name": "Putra Sudaryanto",
-			"email": "putra@ommu.co",
-			"homepage": "https://ommu.co",
+			"email": "putra@ommu.id",
+			"homepage": "https://ommu.id",
 			"role": "Creator"
 		}
 	],
 	"require": {
 		"php": "~7.0",
-		"yiisoft/yii2": "~2.0.13"
+		"yiisoft/yii2": "~2.0.13",
+		"yiisoft/yii2-imagine": "~2.0"
 	},
 	"autoload": {
 		"psr-4": {
