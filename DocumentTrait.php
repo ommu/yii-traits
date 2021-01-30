@@ -36,7 +36,7 @@ trait DocumentTrait
 		
 			$html2pdf->writeHTML($content);
 
-			$fileName = Inflector::slug(join('-', [time(), UuidHelper::uuid(), $outputName])).'.pdf';
+			$fileName = $outputName.'.pdf';
 			$filePath = join('/', [$outputPath, $fileName]);
 
             if ($preview == false) {
