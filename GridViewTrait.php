@@ -33,10 +33,11 @@ trait GridViewTrait
 	{
 		$column = [];
 
-		foreach($columns as $val) {
+		foreach ($columns as $val) {
 			$keyIndex = $this->getKeyIndex($val);
-			if($keyIndex)
-				$column[] = $keyIndex;
+			if ($keyIndex) {
+                $column[] = $keyIndex;
+            }
 		}
 
 		return $column;
@@ -48,12 +49,13 @@ trait GridViewTrait
 	 */
 	public function getKeyIndex($data)
 	{
-		if(!is_array($data))
-			return $data;
+		if (!is_array($data)) {
+            return $data;
 
-		else {
-			if(array_key_exists('attribute', $data))
-				return $data['attribute'];
+        } else {
+			if (array_key_exists('attribute', $data)) {
+                return $data['attribute'];
+            }
 		}
 
 		return false;
@@ -66,7 +68,7 @@ trait GridViewTrait
 	 */
 	public function filterDatepicker($model, $attribute)
 	{
-		if(Yii::$app->params['gridView']['datepicker'] == true) {
+		if (Yii::$app->params['gridView']['datepicker'] == true) {
 			return \yii\jui\DatePicker::widget([
 				'model' => $model,
 				'attribute' => $attribute,

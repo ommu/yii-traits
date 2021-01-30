@@ -29,8 +29,9 @@ trait ThemeTrait
 	{
 		$themePath = Yii::getAlias(Yii::$app->params['themePath']);
 		$themeFile = $themePath . DIRECTORY_SEPARATOR . $theme . DIRECTORY_SEPARATOR . $theme.'.yaml';
-		if(!file_exists($themeFile))
-			return false;
+		if (!file_exists($themeFile)) {
+            return false;
+        }
 		
 		return Yaml::parseFile($themeFile);
 	}

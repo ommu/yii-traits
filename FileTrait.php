@@ -32,12 +32,13 @@ trait FileTrait
 	 */
 	public function formatFileType($data, $type=true, $separator=', ') 
 	{
-		if($type == true)
+		if ($type == true) {
 			$result = array_map('trim', explode($separator, $data));
-		else
+        } else {
 			$result = implode($separator, $data);
+        }
 			
-		return $result; 
+		return $result;
 	}
 
 	/**
@@ -46,25 +47,29 @@ trait FileTrait
 	public function createUploadDirectory($path, $key=null) 
 	{
 		$uploadPath = $path;
-		if($key != null)
-			$uploadPath = join('/', [$path, $key]);
+		if ($key != null) {
+            $uploadPath = join('/', [$path, $key]);
+        }
 		$verwijderenPath = join('/', [$path, 'verwijderen']);
 		
 		// Add directory
-		if(!file_exists($uploadPath) || !file_exists($verwijderenPath)) {
-			if($key != null)
-				@mkdir($path, 0755, true);
+		if (!file_exists($uploadPath) || !file_exists($verwijderenPath)) {
+			if ($key != null) {
+                @mkdir($path, 0755, true);
+            }
 			@mkdir($uploadPath, 0755, true);
 			@mkdir($verwijderenPath, 0755, true);
 
 			// Add file in directory (index.php)
 			$indexFile = join('/', [$uploadPath, 'index.php']);
-			if(!file_exists($indexFile))
-				file_put_contents($indexFile, "<?php\n");
+			if (!file_exists($indexFile)) {
+                file_put_contents($indexFile, "<?php\n");
+            }
 				
 			$verwijderenFile = join('/', [$verwijderenPath, 'index.php']);
-			if(!file_exists($verwijderenFile))
-				file_put_contents($verwijderenFile, "<?php\n");
+			if (!file_exists($verwijderenFile)) {
+                file_put_contents($verwijderenFile, "<?php\n");
+            }
 		} else {
 			@chmod($uploadPath, 0755, true);
 			@chmod($verwijderenPath, 0755, true);
@@ -89,7 +94,7 @@ trait FileTrait
 	 */
 	public function deleteFolder($path) 
 	{
-		if(file_exists($path)) {
+		if (file_exists($path)) {
 			$fh = dir($path);
 			while (false !== ($files = $fh->read())) {
 				@unlink($fh->path.'/'.$files);
@@ -99,7 +104,8 @@ trait FileTrait
 
 			return true;
 
-		} else 
-			return false;
+		} else {
+            return false;
+        }
 	}
 }

@@ -44,11 +44,11 @@ trait UtilityTrait
 	{
 		$str = trim($str);
 
-		if($separator === 'dash')
-			$separator = '-';
-			
-		elseif($separator === 'underscore')
-			$separator = '_';
+		if ($separator === 'dash') {
+            $separator = '-';
+        } elseif ($separator === 'underscore') {
+            $separator = '_';
+        }
 
 		$qSeparator = preg_quote($separator, '#');
 		$trans = [
@@ -60,10 +60,11 @@ trait UtilityTrait
 
 		$str = strip_tags($str);
 		foreach ($trans as $key => $val)
-			$str = preg_replace('#'.$key.'#i', $val, $str);
+            $str = preg_replace('#'.$key.'#i', $val, $str);
 
-		if ($lowercase === true)
-			$str = strtolower($str);
+		if ($lowercase === true) {
+            $str = strtolower($str);
+        }
 
 		return trim(trim($str, $separator));
 	}
@@ -74,10 +75,11 @@ trait UtilityTrait
 	public function licenseCode($source='1234567890', $length=16, $char=4)
 	{
 		$mod = $length%$char;
-		if($mod == 0)
-			$sep = ($length/$char);
-		else
-			$sep = (int)($length/$char)+1;
+		if ($mod == 0) {
+            $sep = ($length/$char);
+        } else {
+            $sep = (int)($length/$char)+1;
+        }
 		
 		$sourceLength = strlen($source);
 		$random = '';
@@ -86,10 +88,11 @@ trait UtilityTrait
 		
 		$license = '';
 		for ($i = 0; $i < $sep; $i++) {
-			if($i != $sep-1)
-				$license .= substr($random,($i*$char),$char).'-';
-			else
-				$license .= substr($random,($i*$char),$char);
+			if ($i != $sep-1) {
+                $license .= substr($random,($i*$char),$char).'-';
+            } else {
+                $license .= substr($random,($i*$char),$char);
+            }
 		}
 
 		return $license;
@@ -102,15 +105,17 @@ trait UtilityTrait
 	 */
 	public function quickAction($url, $id, $alert=null, $single=false)
 	{
-		if($id == 2)
-			return Yii::t('app', 'Deleted');
+		if ($id == 2) {
+            return Yii::t('app', 'Deleted');
+        }
 
-		if($alert == null)
-			$alert = 'Publish,Unpublish';
+		if ($alert == null) {
+            $alert = 'Publish,Unpublish';
+        }
 		$alertArray = explode('#', $alert);
 
 		$textArray = $titleArray = explode(',', $alert);
-		if(count($alertArray) != 1) {
+		if (count($alertArray) != 1) {
 			$textArray = explode(',', $alertArray[0]);
 			$titleArray = explode(',', $alertArray[1]);
 		}
@@ -119,15 +124,15 @@ trait UtilityTrait
 		$text = $id == 1 ? Yii::t('app', $textArray[0]) : Yii::t('app', $textArray[1]);
 		$title = $id == 1 ? Yii::t('app', $titleArray[1]) : Yii::t('app', $titleArray[0]);
 		$message = Yii::t('app', 'Are you sure you want to {text} this item?', array(
-			'text'=>strtolower($title),
+			'text' => strtolower($title),
 		));
 
-		if($single == true && $id == 1)
-			return Yii::t('app', ucwords(strtolower($textArray[0])));
-			
-		else {
+		if ($single == true && $id == 1) {
+            return Yii::t('app', ucwords(strtolower($textArray[0])));
+
+        } else {
 			return Html::a(ucwords(strtolower($text)), $url, [
-				'title' => Yii::t('app', 'Click to {title}', array('title'=>strtolower($title))),
+				'title' => Yii::t('app', 'Click to {title}', array('title' => strtolower($title))),
 				'data-confirm' => $message,
 				'data-method' => 'post',
 			]);
@@ -146,8 +151,9 @@ trait UtilityTrait
 			1 => Yii::t('app', 'Yes'),
 		];
 
-		if($value !== null)
-			return $items[$value];
+		if ($value !== null) {
+            return $items[$value];
+        }
 		
 		return $items;
 	}
@@ -155,7 +161,8 @@ trait UtilityTrait
 	/**
 	 * replace smart quotes or franky ugly char by micrsooft word 'copas'
 	 * 
-	 * @return sting
+	 * @param string $string
+	 * @return string
 	 */
 	public static function convertSmartQuotes($string)
 	{
@@ -168,7 +175,8 @@ trait UtilityTrait
 	 * Cleaning html entities for detail view, so it still 
 	 * html tag<p> or <strong>,etc
 	 * 
-	 * @return sting
+	 * @param string $string
+	 * @return string
 	 */
 	public static function htmlSoftDecode($string)
 	{
@@ -194,7 +202,8 @@ trait UtilityTrait
 	/**
 	 * Super Cleaning for decode and strip all html tag
 	 * 
-	 * @return sting
+	 * @param string $string
+	 * @return string
 	 */
 	public static function htmlHardDecode($string)
 	{
