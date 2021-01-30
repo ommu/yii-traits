@@ -23,7 +23,8 @@
 namespace ommu\traits;
 
 use Yii;
-use yii\helpers\Html;
+use yii\helpers\Html;   
+use yii\helpers\ArrayHelper;
 
 trait UtilityTrait
 {
@@ -214,5 +215,119 @@ trait UtilityTrait
 		$data = str_replace(array("\r", "\n", "	"), "", $data);
 
 		return ($data);
+	}
+
+	/**
+	 * parse Address
+	 * 
+	 * @param array $address
+	 * @return string
+	 */
+	public static function parseAddress($address)
+	{
+        // place
+        if ($address['place'] != '') {
+            $data = self::joinString($address['place']);
+        }
+        // village
+        if ($address['village'] != '') {
+            $data = self::joinString($address['village'], $data);
+        }
+        // city
+        if ($address['city'] != '') {
+            $city = \ommu\core\models\CoreZoneCity::getInfo($address['city'], 'city_name');
+            $data = self::joinString($city, $data);
+        }
+        // province
+        if ($address['province'] != '') {
+            $province = \ommu\core\models\CoreZoneProvince::getInfo($address['province'], 'province_name');
+            $data = self::joinString($province, $data);
+        }
+        // zipcode
+        if ($address['zipcode'] != '') {
+            $data = self::joinString($address['zipcode'], $data);
+        }
+        // country
+        if ($address['country'] != '') {
+            $country = \ommu\core\models\CoreZoneCountry::getInfo($address['country'], 'country_name');
+            $data = self::joinString($country, $data);
+        }
+
+        if ($data != '') {
+            return $data;
+        }
+
+		return '-';
+    }
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function joinString($data, $oldData='')
+	{
+        if ($oldData == '') {
+            $data = $data;
+        } else {
+            $data = join(', ', [$oldData, $data]);
+        }
+
+        return $data;
+	}
+
+	/**
+	 * parse Address
+	 * 
+	 * @param array $address
+	 * @return string
+	 */
+	public static function parseContact($contact)
+	{
+        $data = [];
+        // phone
+        if ($contact['phone'] != '') {
+            $data = ArrayHelper::merge($data, [
+                Yii::t('app', 'Phone: {phone}', [
+                    'phone' => $contact['phone'],
+                ]),
+            ]);
+        }
+        // fax
+        if ($contact['fax'] != '') {
+            $data = ArrayHelper::merge($data, [
+                Yii::t('app', 'FAX: {fax}', [
+                    'fax' => $contact['fax'],
+                ]),
+            ]);
+        }
+        // hotline
+        if ($contact['hotline'] != '') {
+            $data = ArrayHelper::merge($data, [
+                Yii::t('app', 'Hotline: {hotline}', [
+                    'hotline' => $contact['hotline'],
+                ]),
+            ]);
+        }
+        // email
+        if ($contact['email'] != '') {
+            $data = ArrayHelper::merge($data, [
+                Yii::t('app', 'Email: {email}', [
+                    'email' => Yii::$app->formatter->asEmail($contact['email']),
+                ]),
+            ]);
+        }
+        // website
+        if ($contact['website'] != '') {
+            $data = ArrayHelper::merge($data, [
+                Yii::t('app', 'Website: {website}', [
+                    'website' => Yii::$app->formatter->asUrl($contact['website']),
+                ]),
+            ]);
+        }
+
+        if (!empty($data)) {
+            return Html::ul($data, ['encode' => false, 'class' => 'list-boxed']);
+        }
+
+		return '-';
 	}
 }
