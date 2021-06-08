@@ -17,13 +17,20 @@
  *	convertSmartQuotes
  *	htmlSoftDecode
  *	htmlHardDecode
+ *  parseAddress
+ *  joinString
+ *  parseContact
+ *  asDatetime
+ *  strToArray
+ *  arrayToStr
+ *  getUserIP
  *
  */
 
 namespace ommu\traits;
 
 use Yii;
-use yii\helpers\Html;   
+use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 
 trait UtilityTrait
@@ -233,6 +240,10 @@ trait UtilityTrait
         if ($address['village'] != '') {
             $data = self::joinString($address['village'], $data);
         }
+        // district
+        if ($address['district'] != '') {
+            $data = self::joinString($address['district'], $data);
+        }
         // city
         if ($address['city'] != '') {
             $city = \ommu\core\models\CoreZoneCity::getInfo($address['city'], 'city_name');
@@ -301,9 +312,10 @@ trait UtilityTrait
         }
         // hotline
         if ($contact['hotline'] != '') {
+            $hotline = preg_split('/\n|\r\n?\s*/', $contact['hotline']);
             $data = ArrayHelper::merge($data, [
                 Yii::t('app', 'Hotline: {hotline}', [
-                    'hotline' => $contact['hotline'],
+                    'hotline' => implode($hotline, ', '),
                 ]),
             ]);
         }
@@ -330,4 +342,58 @@ trait UtilityTrait
 
 		return '-';
 	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function asDatetime($datetime, $dateFormat='medium', $timeFormat='long')
+	{
+        return Yii::$app->formatter->asDatetime($datetime, 'medium');
+	}
+
+    /**
+	 * {@inheritdoc}
+     *
+     * @param string $data
+     * @param string $separator Word separator (usually '-' or '_')
+     */
+    public function strToArray($data, $separator=',') 
+    {
+        return array_map('trim', explode($separator, $data));
+    }
+
+    /**
+	 * {@inheritdoc}
+     *
+     * @param array $data
+     * @param string $separator Word separator (usually '-' or '_')
+     */
+    public function arrayToStr($data, $separator=', ') 
+    {
+        return implode($separator, $data);
+    }
+
+    /**
+     * The function to get the visitor's IP.
+     */
+    public function getUserIP()
+    {
+        //check ip from share internet
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+            return $_SERVER['HTTP_CLIENT_IP'];
+        }
+
+        //to check ip is pass from proxy
+        else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            return $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else if (!empty($_SERVER['HTTP_X_FORWARDED'])) {
+            return $_SERVER['HTTP_X_FORWARDED'];
+        } else if (!empty($_SERVER['HTTP_FORWARDED_FOR'])) {
+            return $_SERVER['HTTP_FORWARDED_FOR'];
+        } else if (!empty($_SERVER['HTTP_FORWARDED'])) {
+            return $_SERVER['HTTP_FORWARDED'];
+        } else {
+            return $_SERVER['REMOTE_ADDR'];
+        }
+    }
 }
