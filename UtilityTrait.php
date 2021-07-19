@@ -24,6 +24,8 @@
  *  strToArray
  *  arrayToStr
  *  getUserIP
+ *  shortText
+ *  shortTitle
  *
  */
 
