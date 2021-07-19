@@ -396,4 +396,33 @@ trait UtilityTrait
             return $_SERVER['REMOTE_ADDR'];
         }
     }
+
+	/**
+	 * {@inheritdoc}
+	 */
+    function shortText($text, $len=60, $dotted = "...")
+    {
+        $text = trim($text);
+        if (strlen($text) > $len) {
+            $rpos = strrpos(substr($text, 0, $len), " ");
+            if ($rpos!==false) {
+                // if there's whitespace, cut off at last whitespace
+                return substr($text, 0, $rpos) . $dotted;
+            } else {
+                // otherwise, just cut after $len chars
+                return substr($text, 0, $len) . $dotted;
+            }
+
+        } else {
+            return $text;
+        }
+    }
+
+	/**
+	 * {@inheritdoc}
+	 */
+    function shortTitle($text, $len=20, $dotted = "...")
+    {
+        return $this->shortText($text, $len, $dotted);
+    }
 }
