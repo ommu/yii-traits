@@ -26,6 +26,7 @@
  *  getUserIP
  *  shortText
  *  shortTitle
+ *  loadYaml
  *
  */
 
@@ -34,6 +35,7 @@ namespace ommu\traits;
 use Yii;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use Symfony\Component\Yaml\Yaml;
 
 trait UtilityTrait
 {
@@ -427,4 +429,16 @@ trait UtilityTrait
     {
         return $this->shortText($text, $len, $dotted);
     }
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function loadYaml($yamlFile)
+	{
+		if (!file_exists($yamlFile)) {
+            return false;
+        }
+		
+		return Yaml::parseFile($yamlFile);
+	}
 }
