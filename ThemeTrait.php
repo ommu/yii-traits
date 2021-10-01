@@ -9,7 +9,7 @@
  * @link https://github.com/ommu/yii-traits
  *
  * Contains many function that most used :
- *	themeParseYaml
+ *	themeInfo
  *	themeMenu
  *
  */
@@ -22,10 +22,12 @@ use Symfony\Component\Yaml\Yaml;
 
 trait ThemeTrait
 {
+    use \ommu\traits\UtilityTrait;
+
 	/**
 	 * {@inheritdoc}
 	 */
-	public static function themeParseYaml($theme)
+	public static function themeInfo($theme)
 	{
 		$themePath = Yii::getAlias(Yii::$app->params['themePath']);
 		$themeFile = $themePath . DIRECTORY_SEPARATOR . $theme . DIRECTORY_SEPARATOR . $theme.'.yaml';
@@ -41,7 +43,7 @@ trait ThemeTrait
 	 */
 	public function themeMenu($theme)
 	{
-		$yaml = self::themeParseYaml($theme);
+		$yaml = self::themeInfo($theme);
 
 		return is_array($yaml) ? $yaml['theme_menu'] : [];
 	}
