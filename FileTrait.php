@@ -20,6 +20,7 @@ namespace ommu\traits;
 
 use Yii;
 use yii\imagine\Image;
+use Symfony\Component\Filesystem\Filesystem as FileHelper;
 
 trait FileTrait 
 {
@@ -71,8 +72,8 @@ trait FileTrait
                 file_put_contents($verwijderenFile, "<?php\n");
             }
 		} else {
-			@chmod($uploadPath, 0755, true);
-			@chmod($verwijderenPath, 0755, true);
+			@chmod($uploadPath, 0755);
+			@chmod($verwijderenPath, 0755);
 		}
 		
 		return true;
@@ -108,4 +109,25 @@ trait FileTrait
             return false;
         }
 	}
+
+    /**
+     * Wrapper Filesystem class
+     *
+     * dokumentasi lengkapnya bisa dilihat di https://symfony.com/doc/current/components/filesystem.html
+     * contoh: ```php
+     * class CvBiodata {
+     *   use \app\components\traits\FileSystem;
+     *   
+     *   public function savePhoto() {
+     *     self::fs()->mkdir('hello/world', 0777);
+     *   }
+     * }
+     * ```
+     *
+     * @return object Filesystem instance
+     */
+    public static function fs()
+    {
+        return new FileHelper();
+    }
 }

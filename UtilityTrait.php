@@ -132,7 +132,6 @@ trait UtilityTrait
 			$titleArray = explode(',', $alertArray[1]);
 		}
 
-
 		$text = $id == 1 ? Yii::t('app', $textArray[0]) : Yii::t('app', $textArray[1]);
 		$title = $id == 1 ? Yii::t('app', $titleArray[1]) : Yii::t('app', $titleArray[0]);
 		$message = Yii::t('app', 'Are you sure you want to {text} this item?', array(
@@ -140,7 +139,7 @@ trait UtilityTrait
 		));
 
 		if ($single == true && $id == 1) {
-            return Yii::t('app', ucwords(strtolower($textArray[0])));
+            return '<span class="glyphicon glyphicon-ok"></span>';
 
         } else {
 			return Html::a(ucwords(strtolower($text)), $url, [
@@ -159,8 +158,8 @@ trait UtilityTrait
 	public function filterYesNo($value=null) 
 	{
 		$items = [
-			0 => Yii::t('app', 'No'),
-			1 => Yii::t('app', 'Yes'),
+			'0' => Yii::t('app', 'No'),
+			'1' => Yii::t('app', 'Yes'),
 		];
 
 		if ($value !== null) {
